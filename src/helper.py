@@ -20,8 +20,7 @@ def load_repo(repo_path):
                                            suffixes=[".py"],
                                            parser=LanguageParser
                                            (language=Language.PYTHON, 
-                                            parser_threashold=500)
-                                            )
+                                           ))
     docouments =loader.load()
     return docouments
 
