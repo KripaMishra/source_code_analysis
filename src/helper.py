@@ -5,7 +5,14 @@ from langchain.document_loaders.parsers import LanguageParser
 from langchain.text_splitter import Language
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_community.embeddings import GPT4AllEmbeddings
+import chromadb.utils.embedding_functions as embedding_functions
+from dotenv import load_dotenv
 
+load_dotenv()
+
+HUGGINGFACE_API_KEY = os.environ.get('HUGGINGFACE_API_KEY')
+os.environ["HUGGINGFACE_API_KEY"] = HUGGINGFACE_API_KEY
 
 # Cloning Repos
 def repo_ingestion(repo_url):
@@ -34,6 +41,19 @@ def text_splitter(documents):
 
     return text_chunks
 
-def load_embedding():
-    embeddings=OpenAIEmbeddings(disallowed_special=())
+def load_embedding(text):
+    embeddings = embedding_functions.HuggingFaceEmbeddingFunction(
+    api_key=HUGGINGFACE_API_KEY,
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+    # gpt4all_embd = GPT4AllEmbeddings()
+    # embeddings= gpt4all_embd.embed_documents()
+    # embeddings=OpenAIEmbeddings(disallowed_special=())
     return embeddings
+
+"""
+huggingface_ef = embedding_functions.HuggingFaceEmbeddingFunction(
+    api_key="YOUR_API_KEY",
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+"""
