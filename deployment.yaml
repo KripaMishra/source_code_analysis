@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sca-deployment
+  labels:
+    app: sca 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sca
+  template:
+    metadata:
+      labels:
+        app: sca
+    spec:
+      containers:
+      - name: my-python-app
+        image: kripamishra/my-python-app:v1.0

@@ -1,11 +1,12 @@
 import os
-from git import Repo
 from langchain.document_loaders.generic import GenericLoader
 from langchain.document_loaders.parsers import LanguageParser
 from langchain.text_splitter import Language
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
+import git
 
+git.refresh(path="/mingw64/bin/git.exe")
 
 # Cloning Repos
 def repo_ingestion(repo_url):
